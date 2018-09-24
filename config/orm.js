@@ -38,7 +38,7 @@ const orm = {
   selectAll: function(tableInput, cb) {
     connection.query(`SELECT * FROM ${tableInput};`, function(err, result) {
       if (err) {
-        throw err;
+        console.log(err);
       }
       cb(result);
       // console.log(`selectAll ${result}`);
@@ -57,7 +57,7 @@ const orm = {
 
     connection.query(queryString, vals, function(err, result) {
       if (err) {
-        throw err;
+        console.log(err);
       }
       cb(result);
       // console.log(`insertOne ${result}`);
@@ -74,7 +74,7 @@ const orm = {
 
     connection.query(queryString, function(err, result) {
       if (err) {
-        throw err;
+        console.log(err);
       }
       cb(result);
       // console.log(`updateOne ${result}`);

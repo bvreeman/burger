@@ -4,8 +4,8 @@ const burger = require('../models/burger.js');
 const router = express.Router();
 
 // Create all our routes and set up logic within those routes where required.
-router.get('/', function(req, res) {
-  burger.selectAll(function(data) {
+router.get('/', (req, res) => {
+  burger.selectAll((data) => {
     const hbsObject = {
       burgers: data,
     };
@@ -13,23 +13,23 @@ router.get('/', function(req, res) {
   });
 });
 
-router.post('/api/burgers', function(req, res) {
+router.post('/api/burgers', (req, res) => {
   burger.insertOne([
     'burger_name', 'devoured',
   ], [
     req.body.burger_name, req.body.devoured,
-  ], function(result) {
+  ], (result) => {
     res.json({ id: result.insertID });
   });
 });
 
-router.put('/api/burgers/:id', function(req, res) {
+router.put('/api/burgers/:id', (req, res) => {
   const condition = `id = ${req.params.id}`;
 
   burger.updateOne({
     id: req.param.id,
     // devoured: req.body.devoured,
-  }, condition, function(result) {
+  }, condition, (result) => {
     if (result.changedRows === 0) {
       // If no rows were changed, then the ID must not exist, so 404
       return res.status(404).end();
@@ -40,6 +40,7 @@ router.put('/api/burgers/:id', function(req, res) {
   console.log('BURGER', req.param.id);
   console.log('\n<-------------------------->\n');
 });
+
 
 //   const body = {
 //     ...req.body,
